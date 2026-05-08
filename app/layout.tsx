@@ -1,25 +1,34 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Bricolage_Grotesque, Noto_Naskh_Arabic } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-bricolage',
+  display: 'swap',
+})
+
+const notoArabic = Noto_Naskh_Arabic({
+  subsets: ['arabic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-arabic',
+  display: 'swap',
+})
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8f8f8' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
+  themeColor: [{ media: '(prefers-color-scheme: light)', color: '#f9f9f9' }],
 }
 
 export const metadata: Metadata = {
   title: 'Hesham Basha - Creative Designer',
-  description: 'Premium creative studio showcasing award-winning design work. Campaigns, branding, social media, and print design from Cairo, Egypt.',
+  description:
+    'Premium creative studio showcasing award-winning design work. Campaigns, branding, social media, and print design from Cairo, Egypt.',
   keywords: 'designer, creative, branding, campaign design, graphic design, Egypt',
   authors: [{ name: 'Hesham Basha' }],
   creator: 'Hesham Basha',
@@ -62,11 +71,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
-      <body className="font-sans antialiased bg-background text-foreground">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-      </body>
+    <html lang="en" className={`${bricolage.variable} ${notoArabic.variable}`}>
+      <body className="min-h-dvh bg-background text-foreground antialiased">{children}</body>
+      {process.env.NODE_ENV === 'production' && <Analytics />}
     </html>
   )
 }

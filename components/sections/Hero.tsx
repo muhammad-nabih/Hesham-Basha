@@ -24,29 +24,26 @@ export function Hero() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        // `framer-motion`'s TS types for `ease` don't like the cubic-bezier `number[]` form
-        // in `variants` for this project configuration. Cast to keep the intended curve.
+        duration: 0.75,
         ease: [0.33, 0.66, 0.66, 1] as any,
       },
     },
   }
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-6 lg:px-8 pt-20 pb-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 lg:px-8 pt-24 pb-28 bg-brand-black text-white border-b border-white/10">
       <motion.div
         variants={container}
         initial="hidden"
         animate="visible"
         className="max-w-5xl w-full"
       >
-        {/* Main Heading */}
         <div className="mb-8 lg:mb-12">
           <motion.div variants={item} className="flex flex-col">
-            <span className="text-sm lg:text-base uppercase tracking-widest text-muted-foreground mb-4 block">
+            <span className="font-accent text-sm lg:text-base uppercase tracking-[0.25em] text-primary mb-4 block">
               Welcome to my creative studio
             </span>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-balance">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-balance text-white">
               {words.map((word, i) => (
                 <motion.span
                   key={word}
@@ -54,7 +51,7 @@ export function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     delay: 0.3 + i * 0.2,
-                    duration: 0.8,
+                    duration: 0.75,
                     ease: [0.33, 0.66, 0.66, 1] as any,
                   }}
                   className="block"
@@ -66,38 +63,35 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Tagline */}
         <motion.p
           variants={item}
-          className="text-lg lg:text-xl text-muted-foreground mb-12 lg:mb-16 max-w-2xl leading-relaxed text-pretty"
+          className="text-lg lg:text-xl text-white/70 mb-12 lg:mb-16 max-w-2xl leading-relaxed text-pretty"
         >
           {tagline}
         </motion.p>
 
-        {/* CTA Button */}
         <motion.div variants={item} className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/projects"
-            className="inline-flex items-center justify-center bg-foreground text-background px-8 py-4 text-sm uppercase tracking-wider font-semibold hover:opacity-80 transition-opacity"
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3.5 text-sm uppercase tracking-widest font-semibold text-white shadow-sm transition-interactive hover:bg-brand-primary-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
           >
             View My Work
           </Link>
           <Link
             href="/about"
-            className="inline-flex items-center justify-center border border-foreground text-foreground px-8 py-4 text-sm uppercase tracking-wider font-semibold hover:bg-foreground hover:text-background transition-all"
+            className="inline-flex items-center justify-center rounded-lg border-2 border-white/90 px-8 py-3.5 text-sm uppercase tracking-widest font-semibold text-white transition-interactive hover:bg-white hover:text-brand-black focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
           >
             Learn About Me
           </Link>
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
           delay: 1.2,
-          duration: 0.8,
+          duration: 0.65,
         }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
@@ -110,9 +104,9 @@ export function Hero() {
           }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs uppercase tracking-widest text-muted-foreground">Scroll</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-primary">Scroll</span>
           <svg
-            className="w-5 h-5 text-muted-foreground"
+            className="w-5 h-5 text-primary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

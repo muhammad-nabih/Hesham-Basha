@@ -46,25 +46,29 @@ export default function AboutPage() {
 
       <main className="pt-24">
         {/* Page Header */}
-        <section className="border-b border-border py-16 lg:py-20">
+        <section className="border-b border-white/10 bg-brand-black text-white py-20 lg:py-28">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance">
+              <p className="font-accent text-xs uppercase tracking-[0.28em] text-primary mb-5">
+                Profile
+              </p>
+              <h1 className="text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance text-white">
                 About Me
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                A passionate creative designer with a focus on crafting meaningful visual experiences for brands worldwide.
+              <p className="text-lg text-white/70 max-w-2xl leading-relaxed">
+                A passionate creative designer with a focus on crafting meaningful visual experiences
+                for brands worldwide.
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* Bio Section */}
-        <section className="py-16 lg:py-20 border-b border-border">
+        <section className="py-16 lg:py-20 border-b border-border bg-offwhite">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -72,6 +76,9 @@ export default function AboutPage() {
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6 }}
             >
+              <p className="font-accent text-xs uppercase tracking-[0.28em] text-primary mb-3">
+                Narrative
+              </p>
               <h2 className="text-3xl font-bold tracking-tight mb-6">My Story</h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
@@ -97,7 +104,7 @@ export default function AboutPage() {
         </section>
 
         {/* Skills Section */}
-        <section className="py-16 lg:py-20 border-b border-border">
+        <section className="py-16 lg:py-20 border-b border-border bg-surface">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -106,6 +113,9 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="mb-12"
             >
+              <p className="font-accent text-xs uppercase tracking-[0.28em] text-primary mb-3">
+                Expertise
+              </p>
               <h2 className="text-3xl font-bold tracking-tight">Core Competencies</h2>
             </motion.div>
 
@@ -117,7 +127,7 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.6, delay: idx * 0.05 }}
-                  className="bg-muted p-4 rounded-none text-sm text-center font-medium"
+                  className="rounded-xl border border-border/90 bg-offwhite p-4 text-sm text-center font-medium shadow-sm transition-interactive hover:border-primary/40"
                 >
                   {skill}
                 </motion.div>
@@ -127,7 +137,7 @@ export default function AboutPage() {
         </section>
 
         {/* Tools Section */}
-        <section className="py-16 lg:py-20 border-b border-border">
+        <section className="py-16 lg:py-20 border-b border-border bg-offwhite">
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -136,6 +146,9 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="mb-12"
             >
+              <p className="font-accent text-xs uppercase tracking-[0.28em] text-primary mb-3">
+                Stack
+              </p>
               <h2 className="text-3xl font-bold tracking-tight">Tools & Software</h2>
             </motion.div>
 
@@ -147,7 +160,7 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.6, delay: idx * 0.05 }}
-                  className="border border-border p-4 rounded-none text-sm text-center font-medium hover:bg-muted transition-colors"
+                  className="rounded-xl border border-border bg-card p-4 text-sm text-center font-medium transition-interactive hover:border-primary/50 hover:bg-offwhite"
                 >
                   {tool}
                 </motion.div>
@@ -157,7 +170,7 @@ export default function AboutPage() {
         </section>
 
         {/* Experience Section */}
-        <section className="py-16 lg:py-20 border-b border-border">
+        <section className="py-16 lg:py-20 border-b border-border bg-surface">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -166,6 +179,9 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="mb-12"
             >
+              <p className="font-accent text-xs uppercase tracking-[0.28em] text-primary mb-3">
+                Timeline
+              </p>
               <h2 className="text-3xl font-bold tracking-tight">Experience</h2>
             </motion.div>
 
@@ -177,13 +193,13 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="border-l-2 border-muted pl-6"
+                  className="border-l-2 border-primary pl-6"
                 >
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                  <p className="font-accent text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
                     {exp.year}
                   </p>
                   <h3 className="text-xl font-semibold mb-2">{exp.title}</h3>
-                  <p className="text-sm text-accent mb-3">{exp.company}</p>
+                  <p className="text-sm font-medium text-primary mb-3">{exp.company}</p>
                   <p className="text-muted-foreground">{exp.description}</p>
                 </motion.div>
               ))}
@@ -192,7 +208,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-20">
+        <section className="py-16 lg:py-24 bg-brand-black text-white border-t border-white/10">
           <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -200,15 +216,19 @@ export default function AboutPage() {
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-6">
+              <p className="font-accent text-xs uppercase tracking-[0.28em] text-primary mb-4">
+                Next step
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-6 text-balance">
                 Ready to Collaborate?
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Let&apos;s work together on your next project. Reach out and let&apos;s create something amazing.
+              <p className="text-lg text-white/70 mb-10 leading-relaxed">
+                Let&apos;s work together on your next project. Reach out and let&apos;s create
+                something amazing.
               </p>
               <a
                 href="mailto:contact@example.com"
-                className="inline-flex items-center justify-center bg-foreground text-background px-8 py-4 text-sm uppercase tracking-wider font-semibold hover:opacity-80 transition-opacity"
+                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3.5 text-sm uppercase tracking-widest font-semibold text-white shadow-sm transition-interactive hover:bg-brand-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
               >
                 Get in Touch
               </a>

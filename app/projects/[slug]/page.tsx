@@ -80,7 +80,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <section className="py-16 lg:py-20 border-b border-border">
             <div className="max-w-3xl mx-auto px-6 lg:px-8">
               <div>
-                <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">
+                <p className="font-accent text-xs uppercase tracking-[0.22em] text-primary mb-4">
                   {project.projectType}
                 </p>
                 <h1 className="text-5xl lg:text-6xl font-bold tracking-tight mb-6">
@@ -124,7 +124,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <div className="max-w-3xl mx-auto px-6 lg:px-8">
               <div>
                 <h2 className="text-3xl font-bold tracking-tight mb-6">Project Overview</h2>
-                <div className="prose prose-invert max-w-none">
+                <div className="max-w-none">
                   <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap">
                     {project.fullDescription}
                   </p>
@@ -144,7 +144,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 <div className="space-y-8 lg:space-y-12">
                   {project.galleryImages.map((item, idx) => (
                     <div key={idx}>
-                      <div className="relative w-full h-96 lg:h-[500px] overflow-hidden bg-muted">
+                      <div className="relative w-full h-96 lg:h-[500px] overflow-hidden rounded-xl border border-border bg-card">
                         {item.image?.asset ? (
                           <Image
                             src={urlFor(item.image).width(1400).auto('format').quality(80).url()}
@@ -174,10 +174,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 {prevProject && (
                   <Link href={`/projects/${prevProject.slug}`}>
                     <div className="group cursor-pointer">
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3 group-hover:text-foreground transition-colors">
+                      <p className="font-accent text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3 transition-interactive group-hover:text-primary">
                         Previous Project
                       </p>
-                      <h3 className="text-xl font-semibold group-hover:text-accent transition-colors">
+                      <h3 className="text-xl font-semibold transition-interactive group-hover:text-primary">
                         {prevProject.title}
                       </h3>
                     </div>
@@ -187,10 +187,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                 {nextProject && (
                   <Link href={`/projects/${nextProject.slug}`} className="md:text-right">
                     <div className="group cursor-pointer">
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3 group-hover:text-foreground transition-colors">
+                      <p className="font-accent text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3 transition-interactive group-hover:text-primary">
                         Next Project
                       </p>
-                      <h3 className="text-xl font-semibold group-hover:text-accent transition-colors">
+                      <h3 className="text-xl font-semibold transition-interactive group-hover:text-primary">
                         {nextProject.title}
                       </h3>
                     </div>

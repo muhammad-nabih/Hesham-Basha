@@ -36,7 +36,7 @@ export function ProjectsGrid({ projects, featured = false }: ProjectsGridProps) 
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: 'easeOut' as any,
       },
     },
   }
@@ -65,9 +65,9 @@ export function ProjectsGrid({ projects, featured = false }: ProjectsGridProps) 
         >
           <Link href={`/projects/${project.slug}`}>
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="group cursor-pointer overflow-hidden bg-card rounded-none h-80 md:h-96"
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.25 }}
+              className="group cursor-pointer overflow-hidden rounded-xl border border-border/80 bg-card h-80 md:h-96 shadow-sm"
             >
               <div className="relative w-full h-full">
                 <Image
@@ -87,10 +87,10 @@ export function ProjectsGrid({ projects, featured = false }: ProjectsGridProps) 
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute inset-0 bg-black/40 flex flex-col items-end justify-end p-6 md:p-8"
+                  className="absolute inset-0 bg-black/50 flex flex-col items-end justify-end p-6 md:p-8"
                 >
                   <div className="text-right text-white">
-                    <p className="text-xs uppercase tracking-wider text-white/70 mb-2">
+                    <p className="font-accent text-xs uppercase tracking-[0.2em] text-primary mb-2">
                       {project.projectType}
                     </p>
                     <h3 className="text-2xl md:text-3xl font-bold leading-tight text-white">
@@ -105,7 +105,7 @@ export function ProjectsGrid({ projects, featured = false }: ProjectsGridProps) 
           {/* Project Metadata */}
           <div className="mt-4 space-y-2">
             <Link href={`/projects/${project.slug}`}>
-              <h3 className="text-lg md:text-xl font-semibold group-hover:text-accent transition-colors">
+              <h3 className="text-lg md:text-xl font-semibold transition-interactive group-hover:text-primary">
                 {project.title}
               </h3>
             </Link>
@@ -114,7 +114,7 @@ export function ProjectsGrid({ projects, featured = false }: ProjectsGridProps) 
               {project.tools?.slice(0, 3).map((tool: any) => (
                 <span
                   key={tool._ref}
-                  className="text-xs bg-muted text-muted-foreground px-3 py-1 rounded-none"
+                  className="text-xs border border-border bg-offwhite text-muted-foreground px-3 py-1 rounded-md"
                 >
                   {tool._ref.split('.').pop()}
                 </span>
