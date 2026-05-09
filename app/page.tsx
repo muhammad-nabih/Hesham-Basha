@@ -1,3 +1,5 @@
+export const revalidate = 60
+
 import { Hero } from '@/components/sections/Hero'
 import { Navigation } from '@/components/common/Navigation'
 import { Footer } from '@/components/common/Footer'
