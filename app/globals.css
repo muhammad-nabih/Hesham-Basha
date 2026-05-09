@@ -247,3 +247,59 @@
     text-wrap: pretty;
   }
 }
+/*
+  ──────────────────────────────────────────────────────────────
+  ADD THESE TO YOUR globals.css  (or tailwind.config.ts extend)
+  ──────────────────────────────────────────────────────────────
+*/
+ 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+ 
+/* Selection color */
+::selection {
+  background-color: #ff4800;
+  color: #ffffff;
+}
+ 
+/*
+  ── Tailwind config additions (tailwind.config.ts → theme.extend) ──
+ 
+  animation: {
+    marquee: 'marquee 22s linear infinite',
+  },
+  keyframes: {
+    marquee: {
+      '0%':   { transform: 'translateX(0%)' },
+      '100%': { transform: 'translateX(-33.333%)' },
+    },
+  },
+  colors: {
+    brand: {
+      black: '#000000',
+      'primary-hover': '#e04000',
+    },
+    primary: '#ff4800',
+    offwhite: '#e7e7e3',
+    surface: '#f9f9f9',
+  },
+  fontFamily: {
+    sans: ['Bricolage Grotesque', 'sans-serif'],
+    accent: ['Bricolage Grotesque', 'sans-serif'],
+  },
+*/
+ 
+/*
+  ── Google Fonts import (add to layout.tsx <head> or globals.css) ──
+ 
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800;900&display=swap');
+*/
+ 
+/* Transition utility override for interactive elements */
+.transition-interactive {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-duration: 280ms;
+}

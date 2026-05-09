@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useRef } from 'react'
 import { Project } from '@/lib/sanity-queries'
 import { urlFor } from '@/lib/sanity'
 
@@ -12,117 +13,184 @@ interface ProjectsGridProps {
   featured?: boolean
 }
 
+// ─── Tilt card wrapper ────────────────────────────────────────────────────────
+function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [4, -4]), { stiffness: 200, damping: 30 })
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-4, 4]), { stiffness: 200, damping: 30 })
+
+  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect()
+    if (!rect) return
+    x.set((e.clientX - rect.left) / rect.width - 0.5)
+    y.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+  const handleLeave = () => { x.set(0); y.set(0) }
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      onMouseMove={handleMouse}
+      onMouseLeave={handleLeave}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// ─── Single project card ──────────────────────────────────────────────────────
+function ProjectCard({
+  project,
+  index,
+  span,
+}: {
+  project: Project
+  index: number
+  span?: boolean
+}) {
+  const { ref, inView } = useInView({ threshold: 0.12, triggerOnce: true })
+  const imgSrc = project.thumbnail?.asset
+    ? urlFor(project.thumbnail).width(span ? 1400 : 900).auto('format').quality(82).url()
+    : '/placeholder.svg'
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
+      transition={{ delay: index * 0.08, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      className={span ? 'md:col-span-2' : ''}
+    >
+      <TiltCard>
+        <Link href={`/projects/${project.slug}`} className="block group">
+          {/* Image container */}
+          <div
+            className={`relative overflow-hidden bg-[#111] ${
+              span ? 'h-[420px] md:h-[560px]' : 'h-[320px] md:h-[420px]'
+            }`}
+          >
+            {/* Index number — top-left */}
+            <div className="absolute top-5 left-5 z-10 flex items-center gap-2">
+              <span className="text-[10px] font-mono text-white/30 tracking-widest">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+            </div>
+
+            {/* Project type tag — top-right */}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.08 + 0.3, duration: 0.5 }}
+              className="absolute top-5 right-5 z-10"
+            >
+              <span className="text-[9px] uppercase tracking-[0.3em] font-semibold px-3 py-1.5 bg-primary text-white">
+                {project.projectType}
+              </span>
+            </motion.div>
+
+            {/* Image */}
+            <Image
+              src={imgSrc}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+
+            {/* Overlay — clip-path reveal from bottom */}
+            <motion.div
+              initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
+              whileHover={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 bg-brand-black/80 backdrop-blur-[2px] flex flex-col justify-end p-7 md:p-9"
+            >
+              {/* Arrow */}
+              <motion.span
+                initial={{ x: -6, opacity: 0 }}
+                whileHover={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.18, duration: 0.4 }}
+                className="absolute top-7 right-7 text-primary text-2xl font-bold"
+              >
+                ↗
+              </motion.span>
+
+              <p className="text-[9px] uppercase tracking-[0.3em] text-primary mb-3 font-semibold">
+                {project.projectType}
+              </p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-3">
+                {project.title}
+              </h3>
+              {project.shortDescription && (
+                <p className="text-sm text-white/55 leading-relaxed line-clamp-2">
+                  {project.shortDescription}
+                </p>
+              )}
+            </motion.div>
+
+            {/* Bottom gradient always visible */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+          </div>
+
+          {/* Meta below card */}
+          <div className="pt-5 flex items-start justify-between gap-4 border-b border-border/40 pb-5">
+            <div>
+              <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors duration-200">
+                {project.title}
+              </h3>
+              {project.shortDescription && (
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed line-clamp-1">
+                  {project.shortDescription}
+                </p>
+              )}
+            </div>
+
+            {/* Tools */}
+            {project.tools && project.tools.length > 0 && (
+              <div className="flex gap-2 flex-wrap shrink-0">
+                {project.tools.slice(0, 2).map((tool: any) => (
+                  <span
+                    key={tool._ref}
+                    className="text-[9px] border border-border text-muted-foreground px-2.5 py-1 tracking-wide uppercase"
+                  >
+                    {tool._ref.split('.').pop()}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </Link>
+      </TiltCard>
+    </motion.div>
+  )
+}
+
+// ─── Projects grid ────────────────────────────────────────────────────────────
 export function ProjectsGrid({ projects, featured = false }: ProjectsGridProps) {
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  })
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  }
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut' as any,
-      },
-    },
-  }
-
   if (projects.length === 0) {
     return (
-      <div className="text-center py-16">
-        <p className="text-muted-foreground">No projects available yet.</p>
+      <div className="text-center py-24 border border-dashed border-border">
+        <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+          No projects yet
+        </p>
       </div>
     )
   }
 
   return (
-    <motion.div
-      ref={ref}
-      variants={container}
-      initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
-      className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
-    >
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12 lg:gap-x-8 lg:gap-y-16">
       {projects.map((project, idx) => (
-        <motion.div
+        <ProjectCard
           key={project._id}
-          variants={item}
-          className={idx === 0 && !featured ? 'md:col-span-2' : ''}
-        >
-          <Link href={`/projects/${project.slug}`}>
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              transition={{ duration: 0.25 }}
-              className="group cursor-pointer overflow-hidden rounded-xl border border-border/80 bg-card h-80 md:h-96 shadow-sm"
-            >
-              <div className="relative w-full h-full">
-                <Image
-                  src={
-                    project.thumbnail?.asset
-                      ? urlFor(project.thumbnail).width(900).auto('format').quality(75).url()
-                      : '/placeholder.svg'
-                  }
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                />
-
-                {/* Overlay with project info on hover */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute inset-0 bg-black/50 flex flex-col items-end justify-end p-6 md:p-8"
-                >
-                  <div className="text-right text-white">
-                    <p className="font-accent text-xs uppercase tracking-[0.2em] text-primary mb-2">
-                      {project.projectType}
-                    </p>
-                    <h3 className="text-2xl md:text-3xl font-bold leading-tight text-white">
-                      {project.title}
-                    </h3>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </Link>
-
-          {/* Project Metadata */}
-          <div className="mt-4 space-y-2">
-            <Link href={`/projects/${project.slug}`}>
-              <h3 className="text-lg md:text-xl font-semibold transition-interactive group-hover:text-primary">
-                {project.title}
-              </h3>
-            </Link>
-            <p className="text-sm text-muted-foreground">{project.shortDescription}</p>
-            <div className="flex gap-3 flex-wrap pt-2">
-              {project.tools?.slice(0, 3).map((tool: any) => (
-                <span
-                  key={tool._ref}
-                  className="text-xs border border-border bg-offwhite text-muted-foreground px-3 py-1 rounded-md"
-                >
-                  {tool._ref.split('.').pop()}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+          project={project}
+          index={idx}
+          // First card spans full width when featured
+          span={featured && idx === 0}
+        />
       ))}
-    </motion.div>
+    </div>
   )
 }
