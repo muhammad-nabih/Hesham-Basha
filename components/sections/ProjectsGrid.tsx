@@ -148,13 +148,13 @@ function ProjectCard({
               )}
             </div>
 
-            {/* Tools */}
+            {/* Tools - hidden for now just show for me  */}
             {project.tools && project.tools.length > 0 && (
               <div className="flex gap-2 flex-wrap shrink-0">
                 {project.tools.slice(0, 2).map((tool: any) => (
                   <span
                     key={tool._ref}
-                    className="text-[9px] border border-border text-muted-foreground px-2.5 py-1 tracking-wide uppercase"
+                    className="text-[9px] border border-border text-muted-foreground px-2.5 py-1 tracking-wide uppercase hidden"
                   >
                     {tool._ref.split('.').pop()}
                   </span>
