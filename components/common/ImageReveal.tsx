@@ -26,36 +26,25 @@ export function ImageReveal({
   sizes,
 }: ImageRevealProps) {
   const safeSrc = src && src.trim().length > 0 ? src : '/placeholder.svg'
-
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  })
+  const { ref, inView } = useInView({ threshold: 0.08, triggerOnce: true })
   const shouldShow = priority || inView
-
-  const variants = {
-    hidden: {
-      opacity: 0,
-      clipPath: 'inset(0 100% 0 0)',
-    },
-    visible: {
-      opacity: 1,
-      clipPath: 'inset(0 0 0 0)',
-      transition: {
-        duration: 1,
-        ease: [0.33, 0.66, 0.66, 1] as any,
-      },
-    },
-  }
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
-      animate={shouldShow ? 'visible' : 'hidden'}
-      variants={variants}
+      initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
+      animate={shouldShow ? { clipPath: 'inset(0% 0% 0% 0%)' } : {}}
+      transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
       className={`overflow-hidden ${className}`}
     >
+      {/* Scan-line overlay that wipes across on reveal */}
+      <motion.div
+        initial={{ y: '0%', opacity: 1 }}
+        animate={shouldShow ? { y: '-100%', opacity: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-0 z-10 bg-primary pointer-events-none"
+      />
+
       {fill ? (
         <Image
           src={safeSrc}
