@@ -864,7 +864,7 @@ function HeroBrandVisual() {
           animate={{ opacity: 0.6 }}
           transition={{ delay: 1.6, duration: 0.5 }}
         >
-          PORTFOLIO 2025
+          PORTFOLIO 2026
         </motion.text>
 
         <motion.line

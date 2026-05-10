@@ -1,12 +1,21 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 
 import { BrandLogo } from '@/components/common/BrandLogo'
 import { cn } from '@/lib/utils'
+
+/* ─── smooth-scroll helper for hash links ───────────────────────────── */
+function scrollToHash(hash: string) {
+  const id = hash.replace('#', '')
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,6 +23,7 @@ export function Navigation() {
   const [atTop, setAtTop] = useState(true)
   const lastScrollY = useRef(0)
   const pathname = usePathname()
+  const router = useRouter()
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
@@ -27,11 +37,28 @@ export function Navigation() {
     { label: 'Work', href: '/projects' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '#contact' },
+    { label: 'Collaboration', href: '#success-partners' }, // ← renamed
   ]
 
   const isActive = (href: string) => {
     if (href.startsWith('#')) return false
     return pathname === href || pathname.startsWith(`${href}/`)
+  }
+
+  /* Handle clicks: hash links → smooth scroll; page links → router */
+  function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!href.startsWith('#')) return // let Next.js <Link> handle page links normally
+    e.preventDefault()
+    setIsOpen(false)
+
+    // If we're not on the homepage, navigate there first then scroll
+    if (pathname !== '/') {
+      router.push('/' + href)
+      // Give the page a moment to mount then scroll
+      setTimeout(() => scrollToHash(href), 350)
+    } else {
+      scrollToHash(href)
+    }
   }
 
   return (
@@ -41,7 +68,6 @@ export function Navigation() {
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-400',
-          // Always dark — never white. Border fades in on scroll.
           'bg-brand-black',
           atTop ? 'border-b border-transparent' : 'border-b border-white/[0.08]',
         )}
@@ -65,7 +91,19 @@ export function Navigation() {
           >
             {navLinks.map((link) => {
               const active = isActive(link.href)
-              return (
+              return link.href.startsWith('#') ? (
+                /* Hash links — plain <a> with smooth scroll handler */
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="relative group text-[10px] uppercase tracking-[0.28em] font-semibold transition-colors duration-200 py-1 text-white/55 hover:text-white cursor-pointer"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-0.5 left-0 h-px bg-primary w-0 group-hover:w-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]" />
+                </a>
+              ) : (
+                /* Page links — Next.js <Link> */
                 <Link
                   key={link.href}
                   href={link.href}
@@ -161,16 +199,29 @@ export function Navigation() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + i * 0.07, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between py-6 text-4xl font-black text-white hover:text-primary transition-colors duration-200 group"
-                  >
-                    {link.label}
-                    <span className="text-xl text-white/20 group-hover:text-primary transition-colors">
-                      →
-                    </span>
-                  </Link>
+                  {link.href.startsWith('#') ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="flex items-center justify-between py-6 text-4xl font-black text-white hover:text-primary transition-colors duration-200 group cursor-pointer"
+                    >
+                      {link.label}
+                      <span className="text-xl text-white/20 group-hover:text-primary transition-colors">
+                        →
+                      </span>
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center justify-between py-6 text-4xl font-black text-white hover:text-primary transition-colors duration-200 group"
+                    >
+                      {link.label}
+                      <span className="text-xl text-white/20 group-hover:text-primary transition-colors">
+                        →
+                      </span>
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </div>
