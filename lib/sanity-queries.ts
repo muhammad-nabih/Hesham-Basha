@@ -33,6 +33,8 @@ export interface Skill {
   slug: string
 }
 
+const REVALIDATE_TIME = 60
+
 export async function getAllProjects(): Promise<Project[]> {
   const query = `*[_type == "project"] | order(orderRank asc) {
     _id,
@@ -55,7 +57,9 @@ export async function getAllProjects(): Promise<Project[]> {
   }`
 
   try {
-    return await client.fetch(query)
+    return await client.fetch(query, {}, {
+      next: { revalidate: REVALIDATE_TIME }
+    })
   } catch (error) {
     console.error('Error fetching projects:', error)
     return []
@@ -84,7 +88,9 @@ export async function getFeaturedProjects(): Promise<Project[]> {
   }`
 
   try {
-    return await client.fetch(query)
+    return await client.fetch(query, {}, {
+      next: { revalidate: REVALIDATE_TIME }
+    })
   } catch (error) {
     console.error('Error fetching featured projects:', error)
     return []
@@ -113,7 +119,13 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   }`
 
   try {
-    return await client.fetch(query, { slug })
+    return await client.fetch(
+      query,
+      { slug },
+      {
+        next: { revalidate: REVALIDATE_TIME }
+      }
+    )
   } catch (error) {
     console.error('Error fetching project:', error)
     return null
@@ -128,7 +140,9 @@ export async function getSkills(): Promise<Skill[]> {
   }`
 
   try {
-    return await client.fetch(query)
+    return await client.fetch(query, {}, {
+      next: { revalidate: REVALIDATE_TIME }
+    })
   } catch (error) {
     console.error('Error fetching skills:', error)
     return []
