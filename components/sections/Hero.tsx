@@ -424,8 +424,8 @@ function CursorGlow() {
 export function Hero() {
   const stats = [
     { value: '50+', label: 'Projects' },
-    { value: '3+', label: 'Years' },
-    { value: '30+', label: 'Clients' },
+    { value: '2+', label: 'Years' },
+    { value: '20+', label: 'Clients' },
   ]
 
   return (

@@ -94,39 +94,44 @@ const Grain = () => (
 export default function AboutPage() {
   const skills = [
     'Campaign Design',
-    'Brand Identity',
+    'Advertising Visuals',
     'Social Media Design',
-    'Print Design',
     'Visual Communication',
-    'Digital Design',
-    'Advertising',
-    'UX/UI Design',
+    'Creative Concepts',
+    'Art Direction',
+    'Ad Creative Design',
+    'Creative Strategy',
   ]
 
   const tools = [
     { name: 'Adobe Photoshop',       short: 'Ps' },
     { name: 'Adobe Illustrator',     short: 'Ai' },
-    { name: 'Adobe InDesign',        short: 'Id' },
-    { name: 'Adobe After Effects',   short: 'Ae' },
-    { name: 'Adobe Creative Suite',  short: 'Cc' },
-    { name: 'Figma',                 short: 'Fg' },
+ 
   ]
 
   const experience = [
     {
-      year: '2022 — Present',
-      title: 'Creative Designer',
-      company: 'Freelance',
-      description: 'Specializing in advertising campaigns, branding, and digital design for regional and international clients.',
+      year: 'March 2025 — Present',
+      title: 'Graphic Designer',
+      company: 'Elframawey Agency',
+      description:
+        'Developed and executed campaign-based advertising visuals for 10+ brands across UAE and Saudi markets, aligning with brand identity and marketing objectives. Developed visual concepts aligned with campaign direction and branding while supporting brand identity development with consistent visual output.',
     },
     {
-      year: '2021 — 2022',
-      title: 'Junior Designer',
-      company: 'Design Studio',
-      description: 'Worked on various design projects including campaigns, social media, and print materials.',
+      year: 'July 2024 — February 2025',
+      title: 'Graphic Designer',
+      company: 'Point Company',
+      description:
+        'Designed engaging and visually appealing social media visuals tailored to different audiences and platforms across multiple brands. Created marketing-focused designs aligned with campaign goals and brand style while assisting in print-ready production materials.',
+    },
+    {
+      year: 'March 2024 — June 2024',
+      title: 'Graphic Designer',
+      company: 'Freelancer',
+      description:
+        'Designed tailored visual content for clients across different industries, adapting to various styles and brand requirements. Managed multiple projects while maintaining timely delivery and worked directly with clients to translate their needs into effective visual designs.',
     },
   ]
-
   const ctaRef = useRef(null)
   const ctaInView = useInView(ctaRef, { once: true, margin: '-60px' })
 

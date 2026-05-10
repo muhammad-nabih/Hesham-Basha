@@ -146,7 +146,7 @@ function StatsStrip() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   const stats = [
-    { value: '3+', label: 'Years Experience' },
+    { value: '2+', label: 'Years Experience' },
     { value: '80+', label: 'Projects Delivered' },
     { value: '100%', label: 'Passion Driven' },
     { value: '∞', label: 'Ideas Generated' },
