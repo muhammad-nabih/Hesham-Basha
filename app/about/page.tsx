@@ -147,7 +147,7 @@ export default function AboutPage() {
 
           {/* Watermark */}
           <div aria-hidden="true" className="pointer-events-none absolute right-0 bottom-0 overflow-hidden leading-none">
-            <span className="text-[20vw] font-black tracking-[-0.04em] text-white/[0.03] select-none whitespace-nowrap">
+            <span className="text-[20vw] font-black tracking-[-0.04em] text-white/90 text-white/[0.03] select-none whitespace-nowrap">
               ABOUT
             </span>
           </div>
@@ -177,7 +177,7 @@ export default function AboutPage() {
 
             {/* Headline */}
             <h1 className="font-black leading-[0.9] tracking-[-0.03em] mb-14 lg:mb-20">
-              <div className="text-[clamp(3.5rem,9vw,8rem)]">
+              <div className="text-[clamp(3.5rem,9vw,8rem)] text-white/90">
                 <SplitChars text="About" delay={0.1} />
               </div>
               <div className="text-[clamp(3.5rem,9vw,8rem)]">

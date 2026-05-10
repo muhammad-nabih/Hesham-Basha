@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Hesham Basha - Creative Designer",
     description:
       "Premium creative studio showcasing award-winning design work.",
-    url: "https://hesham-basha.com",
+    url: "https://hesham-basha.vercel.app",
     type: "website",
     images: [
       {

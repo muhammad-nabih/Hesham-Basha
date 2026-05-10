@@ -37,7 +37,7 @@ function CounterStat({ value, label }: { value: string; label: string }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className="text-3xl lg:text-4xl font-black text-primary tracking-tight">{value}</p>
+      <p className="text-3xl lg:text-4xl font-black text-white/ tracking-tight">{value}</p>
       <p className="text-[10px] uppercase tracking-[0.28em] text-white/35 mt-1.5">{label}</p>
     </motion.div>
   )
@@ -99,8 +99,8 @@ export function ProjectsPageContent({ projects }: ProjectsPageContentProps) {
 
           {/* Headline */}
           <h1 className="font-black leading-[0.9] tracking-[-0.03em] mb-12 lg:mb-16">
-            <div className="text-[clamp(3rem,8.5vw,7.5rem)]">
-              <SplitChars text="All" delay={0.1} />
+            <div className="text-[clamp(3rem,8.5vw,7.5rem)] text-white/90">
+              <SplitChars text="All" delay={0.1}  />
             </div>
             <div className="text-[clamp(3rem,8.5vw,7.5rem)]">
               <SplitChars text="Projects" delay={0.22} className="text-primary" />

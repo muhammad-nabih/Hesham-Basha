@@ -147,7 +147,7 @@ function StatsStrip() {
 
   const stats = [
     { value: '2+', label: 'Years Experience' },
-    { value: '80+', label: 'Projects Delivered' },
+    { value: '50+', label: 'Projects Delivered' },
     { value: '100%', label: 'Passion Driven' },
     { value: '∞', label: 'Ideas Generated' },
   ]

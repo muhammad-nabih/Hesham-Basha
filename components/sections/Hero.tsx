@@ -954,12 +954,9 @@ function SplitCharsGlowing({
           }}
         >
           <motion.span
+          className="text-white/90"
             style={{
-              display: "inline-block",
-              textShadow: glowing
-                ? "0 0 12px rgba(255, 72, 0, 0.45), 0 0 30px rgba(255, 72, 0, 0.15)"
-                : "none",
-            }}
+              display: "inline-block"  }}
             initial={{ y: "105%" }}
             animate={{ y: "0%" }}
             transition={{
@@ -967,6 +964,7 @@ function SplitCharsGlowing({
               duration: 0.8,
               ease: [0.22, 1, 0.36, 1],
             }}
+       
           >
             {char === " " ? "\u00A0" : char}
           </motion.span>
