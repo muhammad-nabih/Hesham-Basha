@@ -9,7 +9,8 @@ const partners = Array.from({ length: 10 }, (_, i) => ({
   id: i + 1,
   src: `/success_partners/${i + 1}.png`,
   alt: `Success Partner ${i + 1}`,
-  spotlight: i + 1 === 1 || i + 1 === 2, // ← the two highlighted ones
+  spotlight: i + 1 === 1 
+//   || i + 1 === 2, // ← the two highlighted ones
 }));
 
 /* ─── Eye SVG icon ─────────────────────────────────────────────────── */
