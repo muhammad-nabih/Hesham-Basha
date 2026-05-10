@@ -126,14 +126,14 @@ function MagneticButton({
 
 // ─── Marquee ──────────────────────────────────────────────────────────────────
 const TICKER_ITEMS = [
-  "Brand Identity",
-  "Visual Design",
-  "Motion Graphics",
-  "UI/UX Design",
-  "Typography",
-  "Art Direction",
-  "Logo Design",
   "Campaign Design",
+  "Advertising Visuals",
+  "Social Media Design",
+  "Visual Communication",
+  "Creative Concepts",
+  "Art Direction",
+  "Ad Creative Design",
+  "Creative Strategy",
 ];
 
 function MarqueeTicker() {
