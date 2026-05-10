@@ -36,8 +36,8 @@ export function Navigation() {
   const navLinks = [
     { label: 'Work', href: '/projects' },
     { label: 'About', href: '/about' },
+    { label: 'Collaboration', href: '#success-partners' }, 
     { label: 'Contact', href: '#contact' },
-    { label: 'Collaboration', href: '#success-partners' }, // ← renamed
   ]
 
   const isActive = (href: string) => {
