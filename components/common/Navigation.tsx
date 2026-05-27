@@ -132,7 +132,7 @@ export function Navigation() {
             className="hidden md:block"
           >
             <a
-              href="mailto:contact@example.com"
+              href="mailto:heshamahmedd293@gmail.com"
               className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] font-bold px-5 py-2.5 border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-250"
             >
               Hire Me
@@ -233,8 +233,8 @@ export function Navigation() {
               className="relative mt-auto flex flex-col gap-4"
             >
               <a
-                href="mailto:contact@example.com"
-                className="inline-flex items-center justify-center gap-3 bg-primary px-8 py-4 text-[11px] uppercase tracking-[0.28em] font-bold text-white"
+              href="mailto:heshamahmedd293@gmail.com"
+              className="inline-flex items-center justify-center gap-3 bg-primary px-8 py-4 text-[11px] uppercase tracking-[0.28em] font-bold text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Hire Me →

@@ -182,8 +182,8 @@ export function ProjectsPageContent({ projects }: ProjectsPageContentProps) {
           </div>
 
           <a
-            href="mailto:contact@example.com"
-            className="shrink-0 inline-flex items-center gap-3 bg-primary px-9 py-4 text-[11px] uppercase tracking-[0.28em] font-bold text-white hover:bg-white hover:text-black transition-all duration-300"
+              href="mailto:heshamahmedd293@gmail.com"
+              className="shrink-0 inline-flex items-center gap-3 bg-primary px-9 py-4 text-[11px] uppercase tracking-[0.28em] font-bold text-white hover:bg-white hover:text-black transition-all duration-300"
           >
             Get in Touch →
           </a>
