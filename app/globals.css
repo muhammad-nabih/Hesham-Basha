@@ -303,3 +303,20 @@ html {
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   transition-duration: 280ms;
 }
+
+
+/* Add this to globals.css — replaces the inline onMouseOver/onMouseOut handlers
+   so the WhatsApp CTA works without making Footer a client component */
+
+   
+   .whatsapp-cta {
+    background: rgba(37, 211, 102, 0);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  .whatsapp-cta:hover {
+    background: rgba(37, 211, 102, 0.05);
+  }
+  .whatsapp-icon-wrap {
+    background: rgba(37, 211, 102, 0.12);
+    border: 1.5px solid rgba(37, 211, 102, 0.4);
+  }

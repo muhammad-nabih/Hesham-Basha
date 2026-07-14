@@ -36,6 +36,7 @@ export function Navigation() {
   const navLinks = [
     { label: 'Work', href: '/projects' },
     { label: 'About', href: '/about' },
+    { label: 'Blog', href: '/blog' },
     { label: 'Collaboration', href: '#success-partners' }, 
     { label: 'Contact', href: '#contact' },
   ]
