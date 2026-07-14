@@ -52,19 +52,19 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/hesham-basha.png",
+        url: "/logo/logo.png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/hesham-basha.png",
+        url: "/logo/logo.png",
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: "/hesham-basha.png",
+        url: "/logo/logo.png",
         type: "image/svg+xml",
       },
     ],
-    apple: "/hesham-basha.png",
+    apple: "/logo/logo.png",
   },
 };
 

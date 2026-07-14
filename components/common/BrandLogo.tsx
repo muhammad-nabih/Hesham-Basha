@@ -1,13 +1,13 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
-  className?: string
+  className?: string;
   /** Use on dark backgrounds (e.g. footer, dark hero) */
-  inverted?: boolean
-}
+  inverted?: boolean;
+};
 
 export function BrandLogo({ className, inverted = false }: BrandLogoProps) {
   return (
@@ -15,19 +15,18 @@ export function BrandLogo({ className, inverted = false }: BrandLogoProps) {
       href="/"
       aria-label="Home — Hesham Basha"
       className={cn(
-        'group inline-flex items-center transition-interactive',
-        inverted ? 'brightness-0 invert' : '',
+        "group inline-flex items-center transition-interactive",
         className,
       )}
     >
       <Image
-        src="/main-logo.png"
-        alt="Hesham Basha"
+        src="/logo/logo.png"
+        alt="logo"
         width={60}
         height={60}
         className="object-contain transition-transform duration-200 group-hover:scale-105"
         priority
       />
     </Link>
-  )
+  );
 }
